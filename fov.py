@@ -32,3 +32,15 @@ taxRevenue.to_sql(name='masterdata', con=cnx, if_exists = 'append', flavor = "my
 
 
 
+select
+      case when education >= 0 and education <= 3    then "  0 - 3"
+           when education > 3 and price <= 50   then " 11+ - 50"
+           when price > 50 and price <= 100  then " 51+ - 100"
+           else "over 100"
+      end PriceRange,
+      count(*) as TotalWithinRange
+   from
+      YourTable
+   group by 1
+
+
